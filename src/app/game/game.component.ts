@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameComponent implements OnInit {
 
-  squares : any = [];
+  squares: any = [];
   xIsNext = true;
   winner = '';
   counter = 0;
@@ -15,27 +15,27 @@ export class GameComponent implements OnInit {
   freshPage = true;
 
 
-  constructor () {}
+  constructor() { }
 
   ngOnInit(): void {
 
   }
 
   newGame() {
-    this.squares  = Array (9).fill(null);
-    this.winner = '' ;
+    this.squares = Array(9).fill(null);
+    this.winner = '';
     this.isDraw = '';
     this.counter = 0;
     this.freshPage = false;
 
   }
 
-  get player(){
-     return this.xIsNext? 'X' : 'O';
+  get player() {
+    return this.xIsNext ? 'X' : 'O';
   }
 
-  makeMove(idx:number){
-    if (!this.squares[idx]){
+  makeMove(idx: number) {
+    if (!this.squares[idx]) {
 
       this.squares.splice(idx, 1, this.player)
       this.xIsNext = !this.xIsNext;
@@ -44,7 +44,7 @@ export class GameComponent implements OnInit {
     }
     this.winner = this.calculateWinner();
 
-    if (!this.winner && this.counter === 9){
+    if (!this.winner && this.counter === 9) {
 
       this.isDraw = 'yes';
     }
@@ -53,23 +53,22 @@ export class GameComponent implements OnInit {
   }
 
 
-    calculateWinner(){
+  calculateWinner() {
+
     //  0 1 2
     //  3 4 5
     //  6 7 8
-      const lines = [
-        [0,1,2],[3,4,5],[6,7,8],
-        [0,3,6],[1,4,7],[2,5,8],
-        [0,4,8],[6,4,2]
-      ]
-      for (let i=0 ; i< lines.length; i++){
-        const [a,b,c]= lines [i];
-        if (this.squares[a] && this.squares[a] === this.squares[b] && this.squares[a] === this.squares[c]){
-          return this.squares[a];
-        }
-        return null
+    const lines = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8],
+      [0, 3, 6], [1, 4, 7], [2, 5, 8],
+      [0, 4, 8], [6, 4, 2]
+    ]
+    for (let i = 0; i < lines.length; i++) {
+      const [a, b, c] = lines[i];
+      if (this.squares[a] && this.squares[a] === this.squares[b] && this.squares[a] === this.squares[c]) {
+        return this.squares[a];
       }
-      console.log (this.squares)
-
     }
+    return null
+  }
 }
